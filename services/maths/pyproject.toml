@@ -9,6 +9,23 @@ dependencies = [
     "sympy>=1.13.0,<1.14.0",
 ]
 
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0,<9.0.0",
+    "httpx>=0.27.0,<0.29.0",  # required by fastapi/starlette TestClient
+]
+
 [tool.ruff]
 line-length = 100
 target-version = "py39"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+filterwarnings = [
+    # Benign upstream interaction (FastAPI 0.115 + pydantic 2.13): FastAPI
+    # re-wraps request-body models on the validation path and pydantic warns
+    # about our camelCase field aliases having "no effect". They DO take effect —
+    # the camelCase API round-trip tests prove it — so we silence just this one.
+    "ignore:The '.*' attribute with value",
+]
