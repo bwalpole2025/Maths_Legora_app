@@ -9,15 +9,21 @@
     "build": "tsc -b",
     "clean": "tsc -b --clean",
     "start": "node dist/index.js",
-    "dev": "tsx watch src/index.ts"
+    "dev": "tsx watch src/index.ts",
+    "test": "vitest run",
+    "typecheck:test": "tsc -p tsconfig.test.json"
   },
   "dependencies": {
+    "@imaia/compliance": "workspace:*",
     "@imaia/contracts": "workspace:*",
-    "fastify": "^5.2.0"
+    "@imaia/db": "workspace:*",
+    "fastify": "^5.2.0",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",
     "tsx": "^4.19.2",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
   }
 }

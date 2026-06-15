@@ -1,0 +1,20 @@
+[
+  {
+    "id": "g-ans-expand",
+    "problemLatex": "(x+1)^2",
+    "candidateAnswerLatex": "x^2 + 2x + 1",
+    "expectedStatus": "correct"
+  },
+  {
+    "id": "g-ans-factor",
+    "problemLatex": "x^2 - 9",
+    "candidateAnswerLatex": "(x-3)(x+3)",
+    "expectedStatus": "correct"
+  },
+  {
+    "id": "g-ans-fraction",
+    "problemLatex": "\\frac{4}{8}",
+    "candidateAnswerLatex": "\\frac{1}{2}",
+    "expectedStatus": "correct"
+  }
+]

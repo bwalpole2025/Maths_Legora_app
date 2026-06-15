@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  ci:
+    name: ci
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # corepack pins pnpm to the version in package.json `packageManager`.
+      - name: Enable corepack (pnpm)
+        run: corepack enable
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm -w typecheck
+
+      - name: Lint
+        run: pnpm -w lint
+
+      # The standing invariant regression (prompt 13) as a named, must-pass step.
+      # `pnpm -w typecheck` above already built the composite packages, so the
+      # workspace deps this test imports are present.
+      - name: Standing invariant regression (never an unverified correctness claim)
+        run: pnpm --filter @imaia/tutor-orchestrator exec vitest run test/regression-invariant.test.ts
+
+      # Full suite. Live (ANTHROPIC_API_KEY) and service-dependent (Postgres, maths
+      # service) tests skip gracefully, so CI stays deterministic and offline.
+      - name: Test
+        run: pnpm -r test

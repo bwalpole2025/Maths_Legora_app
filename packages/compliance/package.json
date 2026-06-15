@@ -1,0 +1,30 @@
+{
+  "name": "@imaia/compliance",
+  "version": "0.0.0",
+  "private": true,
+  "description": "PII / data-protection controls: ICO AADC + UK-GDPR policy, redaction, retention/minimisation, and log/trace guards for the tutor flow.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -b",
+    "clean": "tsc -b --clean",
+    "typecheck:test": "tsc -p tsconfig.test.json",
+    "test": "tsc -p tsconfig.test.json && vitest run"
+  },
+  "dependencies": {
+    "pino": "^10.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "_comment": "Canonical AADC/UK-GDPR policy fixtures. The compliance helpers and POLICY are asserted against these; treat this file as the policy's golden spec.",
+  "policy": {
+    "studentMessage": { "personalData": true, "retentionDays": 0, "lawfulBasis": "legitimate_interests" },
+    "attachment": { "personalData": true, "retentionDays": 0, "lawfulBasis": "consent" },
+    "trace": { "personalData": false, "retentionDays": 30, "lawfulBasis": "legitimate_interests" },
+    "auditLog": { "personalData": false, "retentionDays": 365, "lawfulBasis": "legal_obligation" }
+  },
+  "retention": [
+    { "note": "trace not yet expired on creation", "category": "trace", "createdAtMs": 1000, "nowMs": 1000, "expired": false },
+    { "note": "trace expires exactly at 30 days", "category": "trace", "createdAtMs": 0, "nowMs": 2592000000, "expired": true },
+    { "note": "trace still live at 29 days", "category": "trace", "createdAtMs": 0, "nowMs": 2505600000, "expired": false },
+    { "note": "studentMessage is ephemeral (retentionDays 0)", "category": "studentMessage", "createdAtMs": 5, "nowMs": 5, "expired": true },
+    { "note": "auditLog lives a year", "category": "auditLog", "createdAtMs": 0, "nowMs": 31536000000, "expired": true }
+  ],
+  "redaction": [
+    { "in": "email me at kid@example.com please", "out": "email me at [redacted] please" },
+    { "in": "call 07700 900123 today", "out": "call [redacted] today" },
+    { "in": "I live at SW1A 1AA", "out": "I live at [redacted]" },
+    { "in": "see https://example.com/notes for more", "out": "see [redacted] for more" },
+    { "in": "ping me @jamie_smith on the app", "out": "ping me [redacted] on the app" },
+    { "in": "Simplify (x+1)^2 = x^2 + 2x + 1", "out": "Simplify (x+1)^2 = x^2 + 2x + 1" }
+  ],
+  "containsPii": [
+    { "value": "kid@example.com", "isPii": true },
+    { "value": "reach me on 07700 900123", "isPii": true },
+    { "value": "edexcel-9ma0#6.2", "isPii": false },
+    { "value": "Differentiate x^2 with respect to x", "isPii": false }
+  ],
+  "minimise": [
+    {
+      "record": "studentTurn",
+      "in": { "message": "kid@example.com asked this", "attachmentRef": "upload-1", "mode": "hint_only", "problemId": "q1" },
+      "out": { "mode": "hint_only", "problemId": "q1" }
+    }
+  ]
+}

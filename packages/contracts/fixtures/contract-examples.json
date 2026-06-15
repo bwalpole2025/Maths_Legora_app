@@ -1,0 +1,213 @@
+{
+  "citation": {
+    "label": "Edexcel 9MA0 spec, section 6.2",
+    "sourceRef": "edexcel-9ma0#6.2"
+  },
+  "provenance": {
+    "sourceType": "spec",
+    "sourceId": "edexcel-9ma0",
+    "licence": "Pearson Edexcel specification, reproduced under spec terms",
+    "ownership": "licensed"
+  },
+  "retrievalQuery": {
+    "text": "differentiate x^2 from first principles",
+    "curriculumFilter": {
+      "board": "edexcel",
+      "level": "alevel",
+      "specCode": "9MA0",
+      "topicTags": ["differentiation"]
+    },
+    "k": 8
+  },
+  "retrievedChunk": {
+    "text": "The derivative of x^n is n*x^(n-1).",
+    "citation": {
+      "label": "Edexcel 9MA0 spec, section 6.2",
+      "sourceRef": "edexcel-9ma0#6.2"
+    },
+    "curriculumTags": ["differentiation"],
+    "provenance": {
+      "sourceType": "spec",
+      "sourceId": "edexcel-9ma0",
+      "licence": "Pearson Edexcel specification, reproduced under spec terms",
+      "ownership": "licensed"
+    },
+    "score": 0.87
+  },
+  "retrievalResult": {
+    "chunks": [
+      {
+        "text": "The derivative of x^n is n*x^(n-1).",
+        "citation": {
+          "label": "Edexcel 9MA0 spec, section 6.2",
+          "sourceRef": "edexcel-9ma0#6.2"
+        },
+        "curriculumTags": ["differentiation"],
+        "provenance": {
+          "sourceType": "spec",
+          "sourceId": "edexcel-9ma0",
+          "licence": "Pearson Edexcel specification, reproduced under spec terms",
+          "ownership": "licensed"
+        },
+        "score": 0.87
+      }
+    ],
+    "query": {
+      "text": "differentiate x^2 from first principles",
+      "curriculumFilter": {
+        "board": "edexcel",
+        "level": "alevel",
+        "specCode": "9MA0",
+        "topicTags": ["differentiation"]
+      },
+      "k": 8
+    }
+  },
+  "verifyAnswerRequest": {
+    "problemLatex": "(x+1)^2",
+    "candidateAnswerLatex": "x^2 + 2x + 1",
+    "domainHints": { "assumptions": { "x": { "real": true } } }
+  },
+  "verifyAnswerResult": {
+    "status": "correct",
+    "canonicalAnswerLatex": "x^2 + 2x + 1",
+    "method": "sympy",
+    "detail": "symbolic-equal; ref='(x+1)**2'; candidate='x**2+2*x+1'"
+  },
+  "verifyStepRequest": {
+    "problemLatex": "Simplify 2x + 3x",
+    "priorStepsLatex": ["2x + 3x"],
+    "stepLatex": "5x"
+  },
+  "verifyStepResult": {
+    "status": "correct",
+    "detail": "symbolic-equal; ref='2*x+3*x'; step='5*x'"
+  },
+  "markSchemeMark": {
+    "id": "M1",
+    "type": "M",
+    "maxMarks": 1,
+    "stepIndex": 0,
+    "dependsOn": [],
+    "ft": false,
+    "description": "Correct differentiation method (power rule applied)"
+  },
+  "markScheme": {
+    "marks": [
+      {
+        "id": "M1",
+        "type": "M",
+        "maxMarks": 1,
+        "stepIndex": 0,
+        "dependsOn": [],
+        "ft": false,
+        "description": "Correct differentiation method (power rule applied)"
+      },
+      {
+        "id": "A1",
+        "type": "A",
+        "maxMarks": 1,
+        "stepIndex": 1,
+        "dependsOn": ["M1"],
+        "ft": false,
+        "description": "Correct simplified derivative"
+      }
+    ]
+  },
+  "markWorkingRequest": {
+    "problemLatex": "Differentiate x^2",
+    "studentStepsLatex": ["dy/dx = 2x^1", "dy/dx = 2x"],
+    "markScheme": {
+      "marks": [
+        {
+          "id": "M1",
+          "type": "M",
+          "maxMarks": 1,
+          "stepIndex": 0,
+          "dependsOn": [],
+          "ft": false,
+          "description": "Correct differentiation method (power rule applied)"
+        },
+        {
+          "id": "A1",
+          "type": "A",
+          "maxMarks": 1,
+          "stepIndex": 1,
+          "dependsOn": ["M1"],
+          "ft": false,
+          "description": "Correct simplified derivative"
+        }
+      ]
+    },
+    "allowEcf": true
+  },
+  "perStepStatus": {
+    "index": 0,
+    "status": "correct",
+    "isFirstDivergence": false,
+    "carriedForward": false
+  },
+  "markWorkingResult": {
+    "marksAwarded": 2,
+    "marksAvailable": 2,
+    "firstDivergenceIndex": null,
+    "perStep": [
+      {
+        "index": 0,
+        "status": "correct",
+        "isFirstDivergence": false,
+        "carriedForward": false
+      },
+      {
+        "index": 1,
+        "status": "correct",
+        "isFirstDivergence": false,
+        "carriedForward": false
+      }
+    ],
+    "ecfApplied": false
+  },
+  "studentTurn": {
+    "message": "Is x^2 + 2x + 1 the same as (x+1)^2?",
+    "problemId": "q-123",
+    "attachmentRef": "upload-abc",
+    "mode": "hint_only"
+  },
+  "mathsClaim": {
+    "text": "(x+1)^2 expands to x^2 + 2x + 1.",
+    "verificationStatus": "correct",
+    "citations": [
+      {
+        "label": "Edexcel 9MA0 spec, section 6.2",
+        "sourceRef": "edexcel-9ma0#6.2"
+      }
+    ]
+  },
+  "tutorReply": {
+    "reply": "Yes — they are equal. Try expanding (x+1)^2 yourself to see why.",
+    "claimType": "hint",
+    "claims": [
+      {
+        "text": "(x+1)^2 expands to x^2 + 2x + 1.",
+        "verificationStatus": "correct",
+        "citations": [
+          {
+            "label": "Edexcel 9MA0 spec, section 6.2",
+            "sourceRef": "edexcel-9ma0#6.2"
+          }
+        ]
+      }
+    ],
+    "citations": [
+      {
+        "label": "Edexcel 9MA0 spec, section 6.2",
+        "sourceRef": "edexcel-9ma0#6.2"
+      }
+    ],
+    "trace": {
+      "retrievalHits": ["edexcel-9ma0#6.2"],
+      "verificationCalls": [{ "kind": "verifyAnswer", "status": "correct" }],
+      "routing": "hint"
+    }
+  }
+}

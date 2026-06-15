@@ -4,6 +4,9 @@
   "references": [
     { "path": "packages/contracts" },
     { "path": "packages/tutor-orchestrator" },
-    { "path": "packages/retrieval" }
+    { "path": "packages/retrieval" },
+    { "path": "packages/db" },
+    { "path": "packages/ingestion" },
+    { "path": "packages/compliance" }
   ]
 }
