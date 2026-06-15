@@ -35,3 +35,32 @@ INDETERMINATE_PROBLEMS = [
     (r"\int x \, dx", r"\frac{x^2}{2} + C"),
     ("Prove that the sum of two odd numbers is even", "QED"),
 ]
+
+
+# ---------------------------------------------------------------------------
+# Diagnosis / marking fixtures (prompt 04).
+# ---------------------------------------------------------------------------
+
+# A handwriting submission as it arrives AFTER the upstream Mathpix two-pass OCR
+# + student-confirmation flow (which lives in the Node app, NOT in this truth-layer
+# service): the OCR'd LaTeX lines the student reviewed and approved. The maths
+# service only ever marks confirmed steps.
+HANDWRITING_OCR_CONFIRMED = {
+    "problem_latex": "Simplify 2(x + 3) + 4x",
+    "confirmed": True,
+    "steps_latex": ["2x + 6 + 4x", "6x + 6"],
+}
+
+
+class UnconfirmedOCRError(RuntimeError):
+    """Raised when something tries to mark OCR output the student never confirmed."""
+
+
+def confirmed_steps(submission: dict) -> list:
+    """Model the upstream contract for tests: only a *confirmed* transcript becomes
+    `studentStepsLatex`. Refuses to return steps that were never confirmed, so a
+    test can prove the service never marks unconfirmed OCR. (Lives in tests/, not
+    app/, so the truth layer stays free of any OCR/network code.)"""
+    if not submission.get("confirmed"):
+        raise UnconfirmedOCRError("OCR transcript was not confirmed by the student")
+    return list(submission["steps_latex"])

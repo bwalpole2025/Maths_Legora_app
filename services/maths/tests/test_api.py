@@ -71,6 +71,26 @@ def test_verify_step_endpoint():
     assert r.json()["status"] == "correct"
 
 
+def test_mark_working_endpoint_camelcase():
+    r = client.post(
+        "/diagnose/mark-working",
+        json={
+            "problemLatex": "Simplify 2x + 3x + 4x",
+            "studentStepsLatex": ["5x + 4x", "8x"],
+        },
+    )
+    assert r.status_code == 200
+    body = r.json()
+    assert body["firstDivergenceIndex"] == 1
+    assert body["marksAwarded"] == 1
+    assert body["marksAvailable"] == 2
+    assert body["perStep"][1]["isFirstDivergence"] is True
+    assert "ecfApplied" in body
+    # response uses camelCase aliases only, matching INTERFACES.md
+    assert "first_divergence_index" not in body
+    assert "per_step" not in body
+
+
 def test_no_model_or_network_imports_in_source():
     """Static guard: the model must never reach this service."""
     offenders = []

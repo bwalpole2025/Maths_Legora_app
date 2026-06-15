@@ -1,14 +1,16 @@
 """IMAIA maths service (verification + diagnosis).
 
-Hosts the VerificationService (truth layer, prompt 03) wrapped behind the
-contracts in context/INTERFACES.md §2:
-  GET  /health         -> liveness
-  POST /verify/answer  -> verifyAnswer
-  POST /verify/step    -> verifyStep
+Hosts the truth-layer services wrapped behind the contracts in
+context/INTERFACES.md (§2 VerificationService, §3 DiagnosisService):
+  GET  /health                -> liveness
+  POST /verify/answer         -> verifyAnswer
+  POST /verify/step           -> verifyStep
+  POST /diagnose/mark-working -> markWorking  (first-divergence + ECF)
 
-First-divergence / ECF diagnosis (prompt 04) arrives later. This service is
-internal and NEVER calls a model. `detail` on the responses is debugging data
-and must be stripped before anything reaches a student (orchestrator, prompt 08).
+This service is internal and NEVER calls a model or the network. Marking runs on
+already-confirmed `studentStepsLatex` — the Mathpix OCR + confirmation flow is
+upstream. `detail` on the verify responses is debugging data and must be stripped
+before anything reaches a student (orchestrator, prompt 08).
 """
 
 import warnings
@@ -22,9 +24,11 @@ from fastapi import FastAPI
 warnings.filterwarnings("ignore", message=r"The '.*' attribute with value")
 
 from .models import (  # noqa: E402
+    MarkWorkingRequest, MarkWorkingResult,
     VerifyAnswerRequest, VerifyAnswerResult,
     VerifyStepRequest, VerifyStepResult,
 )
+from .diagnosis.service import mark_working  # noqa: E402
 from .verification.service import verify_answer, verify_step  # noqa: E402
 
 app = FastAPI(title="imaia-maths", version="0.1.0")
@@ -43,3 +47,8 @@ def post_verify_answer(req: VerifyAnswerRequest) -> VerifyAnswerResult:
 @app.post("/verify/step", response_model=VerifyStepResult)
 def post_verify_step(req: VerifyStepRequest) -> VerifyStepResult:
     return verify_step(req)
+
+
+@app.post("/diagnose/mark-working", response_model=MarkWorkingResult)
+def post_mark_working(req: MarkWorkingRequest) -> MarkWorkingResult:
+    return mark_working(req)
