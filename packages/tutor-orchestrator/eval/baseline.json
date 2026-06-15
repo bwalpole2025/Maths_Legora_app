@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "mode": "live",
+  "metrics": {
+    "servedSolutionCorrectness": {
+      "measured": true,
+      "score": 0.75,
+      "passed": 3,
+      "total": 4
+    },
+    "curriculumAdherence": {
+      "measured": true,
+      "score": 1,
+      "passed": 3,
+      "total": 3
+    },
+    "markingAccuracy": {
+      "measured": true,
+      "score": 1,
+      "passed": 3,
+      "total": 3
+    },
+    "hintQuality": {
+      "measured": true,
+      "score": 1,
+      "passed": 2,
+      "total": 2
+    }
+  },
+  "cases": [
+    {
+      "id": "sol-expand-correct",
+      "metric": "servedSolutionCorrectness",
+      "passed": true,
+      "expected": "correct",
+      "actual": "correct",
+      "note": "served == verified, trace-backed"
+    },
+    {
+      "id": "sol-factor-correct",
+      "metric": "servedSolutionCorrectness",
+      "passed": true,
+      "expected": "correct",
+      "actual": "correct",
+      "note": "served == verified, trace-backed"
+    },
+    {
+      "id": "sol-expand-incorrect",
+      "metric": "servedSolutionCorrectness",
+      "passed": true,
+      "expected": "incorrect",
+      "actual": "incorrect",
+      "note": "served == verified, trace-backed"
+    },
+    {
+      "id": "sol-solve-indeterminate",
+      "metric": "servedSolutionCorrectness",
+      "passed": false,
+      "expected": "indeterminate",
+      "actual": "error",
+      "note": "[\n  {\n    \"code\": \"invalid_type\",\n    \"expected\": \"string\",\n    \"received\": \"null\",\n    \"path\": [\n      \"canonicalAnswerLatex\"\n    ],\n    \"message\": \"Expected string, received null\"\n  }\n]"
+    },
+    {
+      "id": "cur-in-scope-cited",
+      "metric": "curriculumAdherence",
+      "passed": true,
+      "expected": "grounded+cited",
+      "actual": "1 claim(s), 1 citation(s)",
+      "note": "grounded + cited, in scope"
+    },
+    {
+      "id": "cur-in-scope-differentiation",
+      "metric": "curriculumAdherence",
+      "passed": true,
+      "expected": "grounded+cited",
+      "actual": "1 claim(s), 1 citation(s)",
+      "note": "grounded + cited, in scope"
+    },
+    {
+      "id": "cur-out-of-scope-empty-retrieval",
+      "metric": "curriculumAdherence",
+      "passed": true,
+      "expected": "no-claim",
+      "actual": "0 claim(s), 0 citation(s)",
+      "note": "no claim / no citation when nothing retrieved"
+    },
+    {
+      "id": "mark-first-divergence",
+      "metric": "markingAccuracy",
+      "passed": true,
+      "expected": "1/2 fdi=1",
+      "actual": "1/2 fdi=1",
+      "note": "matches human marker"
+    },
+    {
+      "id": "mark-all-correct",
+      "metric": "markingAccuracy",
+      "passed": true,
+      "expected": "2/2 fdi=null",
+      "actual": "2/2 fdi=null",
+      "note": "matches human marker"
+    },
+    {
+      "id": "mark-ecf-followthrough",
+      "metric": "markingAccuracy",
+      "passed": true,
+      "expected": "1/2 fdi=0",
+      "actual": "1/2 fdi=0",
+      "note": "matches human marker"
+    },
+    {
+      "id": "hint-grounded-no-leak",
+      "metric": "hintQuality",
+      "passed": true,
+      "expected": "no-leak",
+      "actual": "advanced",
+      "note": "advanced without revealing the answer"
+    },
+    {
+      "id": "hint-adversarial-model-suppressed",
+      "metric": "hintQuality",
+      "passed": true,
+      "expected": "no-leak",
+      "actual": "empty",
+      "note": "adversarial leak stripped by the gate"
+    }
+  ],
+  "passed": false
+}

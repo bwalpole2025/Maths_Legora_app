@@ -25,3 +25,6 @@ __pycache__/
 # OS / editor
 .DS_Store
 *.log
+
+# Eval run artifact (timestamped); the baseline is committed, the latest run is not
+**/eval/scorecard.latest.json
