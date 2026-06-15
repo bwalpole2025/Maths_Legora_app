@@ -1,0 +1,23 @@
+{
+  "name": "@imaia/retrieval",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Retrieval / grounding service. Fastify service stub for prompt 00.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc -b",
+    "clean": "tsc -b --clean",
+    "start": "node dist/index.js",
+    "dev": "tsx watch src/index.ts"
+  },
+  "dependencies": {
+    "@imaia/contracts": "workspace:*",
+    "fastify": "^5.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

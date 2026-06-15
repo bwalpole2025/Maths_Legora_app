@@ -1,0 +1,5 @@
+# Runtime deps for the IMAIA maths service (verification + diagnosis).
+# Pinned to ranges compatible with Python 3.9+.
+fastapi>=0.115.0,<0.116.0
+uvicorn[standard]>=0.32.0,<0.33.0
+sympy>=1.13.0,<1.14.0

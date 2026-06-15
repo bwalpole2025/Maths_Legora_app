@@ -1,0 +1,11 @@
+node_modules
+dist
+.next
+*.tsbuildinfo
+pnpm-lock.yaml
+services/maths/.venv
+
+# Read-only vendored library docs — do not reformat
+context
+prompts
+later

@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# TypeScript build output
+dist/
+*.tsbuildinfo
+
+# Next.js
+.next/
+out/
+next-env.d.ts
+
+# Python
+services/maths/.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# OS / editor
+.DS_Store
+*.log
