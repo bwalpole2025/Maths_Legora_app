@@ -9,22 +9,19 @@
 
 import type {
   DiagnosisService,
-  MarkWorkingRequest,
   MarkWorkingResult,
   RetrievalQuery,
   RetrievalResult,
   RetrievalService,
   RetrievedChunk,
   VerificationService,
-  VerifyAnswerRequest,
   VerifyAnswerResult,
-  VerifyStepRequest,
   VerifyStepResult,
 } from '@imaia/contracts';
 
 import { HttpDiagnosisService } from '../clients/diagnosis.js';
 import { HttpVerificationService } from '../clients/verification.js';
-import type { ModelClaim, ModelClient, ModelGenerationRequest } from '../model.js';
+import type { ModelClaim, ModelClient } from '../model.js';
 import type { RunMode } from './types.js';
 
 export const MATHS_URL = process.env.MATHS_URL ?? 'http://localhost:8000';
@@ -41,16 +38,16 @@ export class SeededRetrieval implements RetrievalService {
 // still runs the always-measured metrics (scope, hint). The truth-dependent
 // metrics skip in hermetic mode, so these returns are never scored as correctness.
 class HermeticVerification implements VerificationService {
-  async verifyAnswer(_req: VerifyAnswerRequest): Promise<VerifyAnswerResult> {
+  async verifyAnswer(): Promise<VerifyAnswerResult> {
     return { status: 'indeterminate', method: 'sympy' };
   }
-  async verifyStep(_req: VerifyStepRequest): Promise<VerifyStepResult> {
+  async verifyStep(): Promise<VerifyStepResult> {
     return { status: 'indeterminate' };
   }
 }
 
 class HermeticDiagnosis implements DiagnosisService {
-  async markWorking(_req: MarkWorkingRequest): Promise<MarkWorkingResult> {
+  async markWorking(): Promise<MarkWorkingResult> {
     return { marksAwarded: 0, marksAvailable: 0, firstDivergenceIndex: null, perStep: [], ecfApplied: false };
   }
 }
@@ -86,7 +83,7 @@ export async function resolveServices(mathsUrl: string = MATHS_URL): Promise<Res
  *  hint_only gate strips a decisive result. */
 export function leakyHintModel(answer: string): ModelClient {
   return {
-    async generate(_req: ModelGenerationRequest) {
+    async generate() {
       const claims: ModelClaim[] = [
         { text: `The final answer is $${answer}$.`, assertsCorrectness: true, citationRefs: [] },
       ];
